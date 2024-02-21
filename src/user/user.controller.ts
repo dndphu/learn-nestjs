@@ -4,6 +4,6 @@ import { Controller, Get } from '@nestjs/common';
 export class UserController {
   @Get()
   findAll(): string {
-    return 'This action returns all user';
+    return 'This action returns all user hi';
   }
 }
