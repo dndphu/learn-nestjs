@@ -10,4 +10,7 @@ export class UserService {
   async getAll(): Promise<IUser[] | undefined> {
     return this.userModel.find().select('-password');
   }
+  findOne(username: string) {
+    return this.userModel.findOne({ username }).exec();
+  }
 }
