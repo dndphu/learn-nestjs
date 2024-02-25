@@ -33,7 +33,7 @@ export class AllExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     // const request = ctx.getRequest();
     const response = ctx.getResponse();
-    console.log('response :>> ', response);
+    // console.log('response :>> ', response);
 
     const httpStatus =
       exception instanceof HttpException
@@ -49,19 +49,11 @@ export class AllExceptionFilter implements ExceptionFilter {
       //   ip: requestIp.getClientIp(request),
       //   exceptioin: exception['name'],
       //   error: exception['response'] || 'Internal Server Error',
-      statusCode: exception.getStatus(),
+      statusCode: httpStatus,
       statusMessage: exception.message || 'Internal Server Error',
     };
 
     this.logger.error('[toimc]', responseBody);
     httpAdapter.reply(response, responseBody, httpStatus);
-
-    // const status = exception.getStatus();
-
-    // response.status(status).json({
-    //   statusCode: status,
-    //   timestamp: new Date().toISOString(),
-    //   message: exception.message || exception.name,
-    // });
   }
 }

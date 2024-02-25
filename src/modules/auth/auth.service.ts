@@ -1,12 +1,11 @@
 import {
   Injectable,
-//   UnauthorizedException,
+  UnauthorizedException,
   ForbiddenException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-// import { IUser } from 'src/users/user.model';
 import { UserService } from '../user/user.service';
-
+import { comparePassword } from '../../utils/hasing';
 @Injectable()
 export class AuthService {
   constructor(
@@ -16,8 +15,15 @@ export class AuthService {
   async signIn(username: string, password: string): Promise<any> {
     const user = await this.userService.findOne(username);
     if (!user) {
-      throw new ForbiddenException('Not found');
+      throw new ForbiddenException('Not found user');
     }
-    return user
+    const validate = await comparePassword(password, user.password);
+    if (!validate) {
+      return new UnauthorizedException();
+    }
+    const payload = { user: user._id };
+    // const token = await this.jwtService.signAsync(payload);
+
+    return user;
   }
 }
