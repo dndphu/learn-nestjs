@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
+import { MongodbConfigService } from 'src/common/database/database.service/mongodb.config.service';
 import configs from 'src/configs/index.config';
 @Module({
   controllers: [],
@@ -17,7 +18,12 @@ import configs from 'src/configs/index.config';
         abortEarly: true,
       },
     }),
-    MongooseModule.forRoot(process.env.MONGODB_URI),
+    // MongooseModule.forRoot(process.env.MONGODB_URI),
+
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useClass: MongodbConfigService,
+    }),
   ],
 })
 export class CommonModule {}

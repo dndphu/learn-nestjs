@@ -15,7 +15,6 @@ async function bootstrap() {
   app.useGlobalInterceptors(new LoggingInterceptor());
   app.useGlobalPipes(new ValidationPipe());
   const configService = app.get(ConfigService);
-  console.log('configService :>> ', configService);
   const globalPrefix: string = configService.get<string>('app.globalPrefix');
   const host: string = configService.get<string>('app.http.host');
   const port: number = configService.get<number>('app.http.port');

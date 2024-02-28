@@ -6,7 +6,7 @@ export default registerAs(
   (): Record<string, any> => ({
     maintenance: process.env.APP_MAINTENANCE === 'true' ?? false,
 
-    name: process.env.APP_NAME ?? 'ack',
+    name: process.env.APP_NAME ?? 'd4rk',
     env: process.env.APP_ENV ?? 'development',
 
     tz: process.env.APP_TZ ?? 'Asia/HoChiMinh',
@@ -19,6 +19,9 @@ export default registerAs(
     },
 
     globalPrefix: '/api',
+    database: {
+      host: process.env.DATABASE_HOST,
+    },
     http: {
       enable: process.env.HTTP_ENABLE === 'true' ?? false,
       host: process.env.HTTP_HOST ?? 'localhost',
