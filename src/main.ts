@@ -27,8 +27,10 @@ async function bootstrap() {
   );
   const jobEnable: boolean = configService.get<boolean>('app.jobEnable');
   app.setGlobalPrefix(globalPrefix);
-  await app.listen(port, host);
-
+  // await app.listen(port, host);
+  await app.listen(port, () => {
+    console.log(`app start port ${port}`);
+  });
   logger.log(`==========================================================`);
   logger.log(`Environment Variable`, 'NestApplication');
   // logger.log(JSON.parse(JSON.stringify(process.env)), 'NestApplication');
