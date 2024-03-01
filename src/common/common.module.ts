@@ -18,12 +18,12 @@ import configs from 'src/configs/index.config';
         abortEarly: true,
       },
     }),
-    // MongooseModule.forRoot(process.env.MONGODB_URI),
+    MongooseModule.forRoot(process.env.DATABASE_HOST),
 
-    MongooseModule.forRootAsync({
-      imports: [ConfigModule],
-      useClass: MongodbConfigService,
-    }),
+    // MongooseModule.forRootAsync({
+    //   imports: [ConfigModule],
+    //   useClass: MongodbConfigService,
+    // }),
   ],
 })
 export class CommonModule {}
